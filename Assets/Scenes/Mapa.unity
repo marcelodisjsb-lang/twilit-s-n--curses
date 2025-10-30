@@ -592,8 +592,6 @@ GameObject:
   - component: {fileID: 1034120818}
   - component: {fileID: 1034120817}
   - component: {fileID: 1034120820}
-  - component: {fileID: 1034120821}
-  - component: {fileID: 1034120822}
   m_Layer: 0
   m_Name: jogador
   m_TagString: Untagged
@@ -726,33 +724,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1034120821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034120815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f42c73276a15146a3a52a3fe6935e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 8
-  jumpForce: 7
-  isGrounded: 1
---- !u!114 &1034120822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034120815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b1fe721d6a7c944b8344c2563ef63d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1117203073
 GameObject:
   m_ObjectHideFlags: 0
