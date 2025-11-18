@@ -29,6 +29,6 @@ public class SistemaDeVidaInimigo : SistemaDeVida
     }
     void AtualizarVida()
     {
-        barraDeVidaInimigo.AtualizarUI(vidaAtual / vidaMaxima);
+        //barraDeVidaInimigo.AtualizarUI(vidaAtual / vidaMaxima);
     }
 }

@@ -592,6 +592,8 @@ GameObject:
   - component: {fileID: 1034120818}
   - component: {fileID: 1034120817}
   - component: {fileID: 1034120820}
+  - component: {fileID: 1034120821}
+  - component: {fileID: 1034120822}
   m_Layer: 0
   m_Name: jogador
   m_TagString: Untagged
@@ -607,8 +609,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1034120815}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.34, y: -0.1946, z: -5.4}
-  m_LocalScale: {x: 5.825, y: 5.6414485, z: 1}
+  m_LocalPosition: {x: -14.93, y: -0.69, z: -5.4}
+  m_LocalScale: {x: 6.8152494, y: 5.371223, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1640853532}
@@ -724,6 +726,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1034120821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034120815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f42c73276a15146a3a52a3fe6935e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpForce: 10
+  isGrounded: 1
+--- !u!114 &1034120822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034120815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf405ca754f73c44b7d6f6422654e4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  danoJogador: 10
 --- !u!1 &1117203073
 GameObject:
   m_ObjectHideFlags: 0
