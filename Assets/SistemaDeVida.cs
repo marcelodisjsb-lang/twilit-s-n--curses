@@ -29,7 +29,7 @@ public class SistemaDeVida : MonoBehaviour
         AtualizarVida();
     }
 
-    private void AtualizarVida() //No futuro isso poderia ser controlado através de eventos
+    public virtual void AtualizarVida() //No futuro isso poderia ser controlado através de eventos
     {
         barraDeVida.AtualizarUI(vidaAtual / vidaMaxima);
     }

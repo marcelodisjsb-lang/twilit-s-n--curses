@@ -27,8 +27,9 @@ public class SistemaDeVidaInimigo : SistemaDeVida
     {
         inimigo.AnimacaoDeMorte();
     }
-    void AtualizarVida()
-    {
+
+    public override void AtualizarVida()
+    {        
         //barraDeVidaInimigo.AtualizarUI(vidaAtual / vidaMaxima);
     }
 }
