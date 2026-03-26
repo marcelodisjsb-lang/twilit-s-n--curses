@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2597455529033751114}
   - component: {fileID: 2597455529033751113}
   - component: {fileID: 2597455529033751116}
-  - component: {fileID: 2597455529033751117}
   - component: {fileID: 2597455529033751119}
+  - component: {fileID: 5723968036168170513}
   m_Layer: 0
   m_Name: jogador
   m_TagString: Untagged
@@ -29,11 +29,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2597455529033751127}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17.130585, y: -1.8819349, z: -5.3420935}
   m_LocalScale: {x: 6.8152494, y: 5.371223, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9199652149257461884}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -147,21 +148,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2597455529033751117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2597455529033751127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f42c73276a15146a3a52a3fe6935e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 10
-  isGrounded: 1
 --- !u!114 &2597455529033751119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,3 +167,71 @@ MonoBehaviour:
     m_Bits: 0
   attackDamage: 20
   attackRate: 2
+--- !u!114 &5723968036168170513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2597455529033751127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3159d2a68e7bbd74fa9fe2cc703cdef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+  jumpForce: 45
+  jumpBufferFrames: 8
+  coyoteTime: 0.1
+  maxAirJumps: 0
+  groundCheckY: 0.2
+  groundCheckX: 0.2
+  groundCheckPoint: {fileID: 9199652149257461884}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  dashSpeed: 0
+  dashTime: 0
+  dashCooldown: 0
+  dashed: 0
+  canDash: 1
+  dashEffect: {fileID: 0}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
+  blinkDuration: 0.1
+  blinkCount: 5
+  fireballPrefab: {fileID: 0}
+  shootPosition: {fileID: 0}
+  shootCooldown: 0
+  upgrades: []
+  health: {fileID: 0}
+--- !u!1 &9006936106054344112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9199652149257461884}
+  m_Layer: 0
+  m_Name: PontoDoChao
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9199652149257461884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9006936106054344112}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.139633, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2597455529033751112}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

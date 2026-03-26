@@ -9,6 +9,7 @@ public class Inimigo : MonoBehaviour
     public int maxHealth = 2;          // Vida do inimigo
     public float knockbackForce = 5f;  // Força do recuo ao levar dano
     [SerializeField] bool movingRight = true;   // Direção inicial do movimento
+    public int danoInimigo = 1;          // dano do inimigo
     private bool vivo = true;
     private bool isKnockBacked = false;
 
@@ -60,14 +61,14 @@ public class Inimigo : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // Inverte direção ao colidir com paredes ou obstáculos
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Inimigo"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Fantasma"))
         {
             movingRight = !movingRight;
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            SistemaDeVida sistemaDeVida = collision.gameObject.GetComponent<SistemaDeVida>();
-            sistemaDeVida.AplicarDano(10);
+            PlayerController sistemaVida = collision.gameObject.GetComponent<PlayerController>();
+            sistemaVida.TakeDamage(danoInimigo);
         }
     }
 
