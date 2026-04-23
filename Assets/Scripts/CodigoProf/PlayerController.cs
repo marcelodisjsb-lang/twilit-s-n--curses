@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
 
     [Header("Vertical Movement Settings")]
-    public float jumpForce = 45f;
+    public float jumpForce = 10f;
     public int jumpBufferFrames = 8;
     private int jumpBufferCounter = 0;
     private float coyoteTimeCounter = 0;
