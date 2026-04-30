@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1957209847239496075}
   m_Layer: 0
   m_Name: inimigo
-  m_TagString: Untagged
+  m_TagString: Inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1957209847239496176}
   m_LocalRotation: {x: -0.06932122, y: 0, z: 0, w: 0.9975944}
   m_LocalPosition: {x: -5.0659, y: -1.555, z: -5.4272}
-  m_LocalScale: {x: 4.617469, y: 4.6423874, z: 1}
+  m_LocalScale: {x: 8.908792, y: 8.4743185, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -163,6 +163,7 @@ MonoBehaviour:
   maxHealth: 2
   knockbackForce: 5
   movingRight: 1
+  danoInimigo: 1
 --- !u!114 &1957209847239496075
 MonoBehaviour:
   m_ObjectHideFlags: 0

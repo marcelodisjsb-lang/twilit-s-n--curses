@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Fantasma
   - jogador
+  - Inimigo
   layers:
   - Default
   - TransparentFX

@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         Flip();
         Move();
         Jump();
-        //Shoot();
+        Shoot();
         StartDash();
         PauseGame();
         VerificarUpgrades();

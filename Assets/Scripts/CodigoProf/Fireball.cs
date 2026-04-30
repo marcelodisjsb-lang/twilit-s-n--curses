@@ -19,16 +19,14 @@ public class Fireball : MonoBehaviour
         transform.Translate(speed * Time.deltaTime * Vector2.right);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // Verifica se a colisão foi com um inimigo
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Inimigo"))
         {
             // Destrói o inimigo
             Destroy(other.gameObject);
+            Destroy(gameObject);
         }
-
-        // Destrói a bala
-        Destroy(gameObject);
     }
 }
