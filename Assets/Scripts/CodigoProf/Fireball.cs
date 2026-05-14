@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
+    public float dano = 10;
     public float speed = 20f; // Velocidade da bala
     public float lifetime = 2f; // Tempo de vida da bala antes de ser destruída
 
@@ -24,9 +25,14 @@ public class Fireball : MonoBehaviour
         // Verifica se a colisão foi com um inimigo
         if (other.CompareTag("Inimigo"))
         {
-            // Destrói o inimigo
-            Destroy(other.gameObject);
+
+            SistemaDeVidaInimigo sistVida = other.gameObject.GetComponent<SistemaDeVidaInimigo>();
+            if(sistVida != null)
+            {
+                sistVida.AplicarDano(dano);
+            }
             Destroy(gameObject);
+            AudioManager.Instance.Play("Morte");
         }
     }
 }

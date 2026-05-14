@@ -142,14 +142,14 @@ public class PlayerController : MonoBehaviour
             if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
             {
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce);
-                //AudioManager.Instance.Play("Pulo");
+                AudioManager.Instance.Play("Pulo");
             }
 
         }
         else if (airJumpCounter < maxAirJumps && Input.GetButtonDown("Jump"))
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce);
-            //AudioManager.Instance.Play("Pulo");
+            AudioManager.Instance.Play("Pulo");
             airJumpCounter++;
         }
 
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
 
 
             Instantiate(fireballPrefab, position, rotation);
-            //AudioManager.Instance.Play("Fireball");
+            AudioManager.Instance.Play("Fireball");
             lastShootTime = Time.time + shootCooldown;
         }
     }
@@ -311,7 +311,7 @@ public class PlayerController : MonoBehaviour
     {
         health.TakeDamage(damage);
         HUDController.Instance.UpdateHearts(); // Atualiza o HUD dos corações
-        //AudioManager.Instance.Play("Dano");
+        AudioManager.Instance.Play("Dano");
         //GameManager.Instance.TremerCamera();
         StartCoroutine(BlinkCoroutine());
 
