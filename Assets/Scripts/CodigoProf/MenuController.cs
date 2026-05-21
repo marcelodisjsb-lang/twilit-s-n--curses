@@ -7,6 +7,7 @@ public class MenuController : MonoBehaviour
 {
     public void IniciarJogo()
     {
+        Debug.Log("teste");
         SceneManager.LoadScene("Jogo");
     }
 

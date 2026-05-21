@@ -5,11 +5,16 @@ using UnityEngine;
 public class Inimigo : MonoBehaviour
 {
     [Header("Configurações")]
-    public float moveSpeed = 2f;       // Velocidade de movimento
-    public int maxHealth = 2;          // Vida do inimigo
-    public float knockbackForce = 5f;  // Força do recuo ao levar dano
-    [SerializeField] bool movingRight = true;   // Direção inicial do movimento
-    public int danoInimigo = 1;          // dano do inimigo
+    public float moveSpeed = 2f;
+    public int maxHealth = 2;
+    public float knockbackForce = 5f;
+    [SerializeField] bool movingRight = true;
+    public int danoInimigo = 1;
+
+    [Header("Pontos de Patrulha")]
+    public Transform pontoA;
+    public Transform pontoB;
+
     private bool vivo = true;
     private bool isKnockBacked = false;
 
@@ -18,38 +23,38 @@ public class Inimigo : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Collider2D col;
 
+    private float targetX;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
+
+        Debug.Log(spriteRenderer);
     }
 
     void Update()
     {
-
         if (isKnockBacked || !vivo) return;
 
-        // Movimento básico para frente
-        Move();
+        Patrulhar();
     }
 
-    void Move()
+    void Patrulhar()
     {
-        // Define a direção do movimento
-        float direction = movingRight ? 1 : -1;
-        rb.velocity = new Vector2(direction * moveSpeed, rb.velocity.y);
+        Transform alvo = movingRight ? pontoB : pontoA;
 
-        // Inverte a direção do sprite do personagem
-        MirrorSprite(direction);
+        // move suavemente até o alvo
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            new Vector2(alvo.position.x, transform.position.y),
+            moveSpeed * Time.deltaTime
+        );
 
-        anim.SetFloat("Velocidade", Mathf.Abs(rb.velocity.x));
-    }
-
-    private void MirrorSprite(float moveInput)
-    {
-        if (moveInput < 0)
+        // virar sprite
+        if (movingRight)
         {
             spriteRenderer.flipX = true;
         }
@@ -57,18 +62,38 @@ public class Inimigo : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-    }
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Inverte direção ao colidir com paredes ou obstáculos
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Fantasma"))
+
+        // chegou no ponto?
+        if (Mathf.Abs(transform.position.x - alvo.position.x) < 0.05f)
         {
             movingRight = !movingRight;
         }
-        else if (collision.gameObject.CompareTag("Player"))
+
+        anim.SetFloat("Velocidade", moveSpeed);
+    }
+
+    private void MirrorSprite(float moveInput)
+    {
+        if (moveInput > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (moveInput < 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController sistemaVida = collision.gameObject.GetComponent<PlayerController>();
-            sistemaVida.TakeDamage(danoInimigo);
+
+            if (sistemaVida != null)
+            {
+                sistemaVida.TakeDamage(danoInimigo);
+            }
         }
     }
 
@@ -79,7 +104,6 @@ public class Inimigo : MonoBehaviour
         float knockbackDirection = movingRight ? -1 : 1;
         Vector2 force = new(knockbackDirection * knockbackForce, 0);
 
-        // Zerar velocidade e Efeito de recuo
         rb.velocity = new Vector2(0, rb.velocity.y);
         rb.AddForce(force, ForceMode2D.Impulse);
 
@@ -88,7 +112,7 @@ public class Inimigo : MonoBehaviour
 
     IEnumerator ResetKnockback()
     {
-        yield return new WaitForSeconds(0.5f); // Aguarde por 0.5 segundos
+        yield return new WaitForSeconds(0.5f);
         isKnockBacked = false;
     }
 
@@ -106,6 +130,7 @@ public class Inimigo : MonoBehaviour
         {
             spriteRenderer.color = corTransparente;
             yield return new WaitForSeconds(0.1f);
+
             spriteRenderer.color = corOriginal;
             yield return new WaitForSeconds(0.1f);
         }
@@ -131,8 +156,9 @@ public class Inimigo : MonoBehaviour
         col.enabled = false;
 
         anim.SetBool("Vivo", vivo);
+
         EfeitoDePiscar();
 
-        Destroy(gameObject, 3); //Configurar o tempo de destruição do objeto
+        Destroy(gameObject, 3);
     }
 }
