@@ -11,6 +11,8 @@ public class Inimigo : MonoBehaviour
     [SerializeField] bool movingRight = true;
     public int danoInimigo = 1;
 
+    public string somMorte;
+
     [Header("Pontos de Patrulha")]
     public Transform pontoA;
     public Transform pontoB;
@@ -158,6 +160,8 @@ public class Inimigo : MonoBehaviour
         anim.SetBool("Vivo", vivo);
 
         EfeitoDePiscar();
+
+        FindObjectOfType<AudioManager>().Play(somMorte);
 
         Destroy(gameObject, 3);
     }

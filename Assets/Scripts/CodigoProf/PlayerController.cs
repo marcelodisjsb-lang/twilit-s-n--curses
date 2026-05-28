@@ -330,6 +330,14 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        AudioManager.Instance.Play("PlayerMorte");
+
+        GameOverManager gm = FindObjectOfType<GameOverManager>();
+        if (gm != null)
+        {
+            gm.AtivarGameOver();
+        }
+
         Debug.Log("No céu tem pão?");
     }
 
