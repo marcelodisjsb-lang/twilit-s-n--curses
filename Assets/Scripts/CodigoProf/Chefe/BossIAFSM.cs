@@ -15,6 +15,10 @@ public class BossIAFSM : MonoBehaviour
     {
         bossAtaques = GetComponent<BossAtaques>();
         bossPatrulha = GetComponent<BossPatrulha>();
+
+        cooldownTimer = attackCooldown;
+
+        Debug.Log("Patrulha: " + (bossPatrulha != null));
     }
 
     void Update()
@@ -29,10 +33,6 @@ public class BossIAFSM : MonoBehaviour
                 ChooseAttackState();
                 break;
 
-            case BossState.Attacking:
-                AttackState();
-                break;
-
             case BossState.Recover:
                 RecoverState();
                 break;
@@ -43,14 +43,11 @@ public class BossIAFSM : MonoBehaviour
     {
         cooldownTimer -= Time.deltaTime;
 
+        bossPatrulha.Patrulhar(true);
+
         if (cooldownTimer <= 0)
         {
-            bossPatrulha.Patrulhar(false);
             currentState = BossState.ChooseAttack;
-        }
-        else
-        {
-            bossPatrulha.Patrulhar(true);
         }
     }
 

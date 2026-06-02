@@ -1,24 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BossPatrulha : MonoBehaviour
 {
-    [Header("Patrulha")]
     public Transform leftPoint;
     public Transform rightPoint;
     public float patrolSpeed = 2f;
-    [SerializeField] bool movingRight = true;
-    [SerializeField] bool patrulhando = false;
+
+    private bool movingRight = true;
+    private bool patrulhando = false;
+
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    private Animator anim;
+
+    // ✔ AQUI (FALTAVA ISSO)
+    private Vector3 originalScale;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        originalScale = transform.localScale;
     }
 
     void FixedUpdate()
@@ -27,31 +29,32 @@ public class BossPatrulha : MonoBehaviour
         {
             Patrulhando();
         }
-        spriteRenderer.flipX = movingRight;
+
+        // FLIP PROFISSIONAL AQUI
+        if (rb.velocity.x > 0.01f)
+            transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+        else if (rb.velocity.x < -0.01f)
+            transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
     }
 
-
-    public void Patrulhar(bool patrulhar)
+    public void Patrulhar(bool estado)
     {
-        patrulhando = patrulhar;
+        patrulhando = estado;
     }
 
     private void Patrulhando()
     {
-        // Movimento entre dois pontos
-        if (movingRight)
-        {
-            rb.velocity = new Vector2(patrolSpeed, rb.velocity.y);
+        if (rightPoint == null || leftPoint == null) return;
 
-            if (Vector2.Distance(transform.position, rightPoint.position) < 1f)
-                movingRight = false;
-        }
-        else
-        {
-            rb.velocity = new Vector2(-patrolSpeed, rb.velocity.y);
+        float targetX = movingRight ? rightPoint.position.x : leftPoint.position.x;
 
-            if (Vector2.Distance(transform.position, leftPoint.position) < 1f)
-                movingRight = true;
-        }
+        float direction = targetX > transform.position.x ? 1f : -1f;
+
+        rb.velocity = new Vector2(direction * patrolSpeed, rb.velocity.y);
+
+        if (movingRight && transform.position.x >= rightPoint.position.x)
+            movingRight = false;
+        else if (!movingRight && transform.position.x <= leftPoint.position.x)
+            movingRight = true;
     }
 }
