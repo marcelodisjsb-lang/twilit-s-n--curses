@@ -6,6 +6,8 @@ public enum BossState { Idle, ChooseAttack, Attacking, Recover }
 
 public class BossAtaques : MonoBehaviour
 {
+    public GameObject fireballPrefab;
+    public Transform firePoint;
     public Transform player;
 
     [Header("Aoe config")]
@@ -134,5 +136,15 @@ public class BossAtaques : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, aoeRadius);
+    }
+
+    public void Attack_Fireball()
+    {
+        Vector2 dir = (player.position - firePoint.position).normalized;
+
+        GameObject fb =
+            Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
+
+        fb.transform.right = dir;
     }
 }

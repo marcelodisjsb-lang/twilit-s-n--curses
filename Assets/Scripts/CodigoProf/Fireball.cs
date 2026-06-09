@@ -22,15 +22,28 @@ public class Fireball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Verifica se a colisão foi com um inimigo
+        // Inimigos normais
         if (other.CompareTag("Inimigo"))
         {
+            SistemaDeVidaInimigo sistVida = other.GetComponent<SistemaDeVidaInimigo>();
 
-            SistemaDeVidaInimigo sistVida = other.gameObject.GetComponent<SistemaDeVidaInimigo>();
-            if(sistVida != null)
+            if (sistVida != null)
             {
                 sistVida.AplicarDano(dano);
             }
+
+            Destroy(gameObject);
+            AudioManager.Instance.Play("Morte");
+            return;
+        }
+
+        // Boss
+        BossVida boss = other.GetComponent<BossVida>();
+
+        if (boss != null)
+        {
+            boss.TakeDamage((int)dano);
+
             Destroy(gameObject);
             AudioManager.Instance.Play("Morte");
         }

@@ -1,94 +1,130 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossIAFSM : MonoBehaviour
 {
     public Transform player;
-    public float attackCooldown = 2f;
 
-    private BossState currentState = BossState.Idle;
-    private float cooldownTimer = 0f;
-    private int chosenAttack = -1;
+    [Header("Movement")]
+    public float speed = 3f;
 
-    private BossAtaques bossAtaques;
-    private BossPatrulha bossPatrulha;
-    void Awake()
+    [Header("Attack Range")]
+    public float attackRange = 5f;
+
+    [Header("Fireball")]
+    public GameObject fireballPrefab;
+    public Transform firePoint;
+    public float fireCooldown = 4f;
+
+    private bool canShoot = true;
+
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
+
+    void Start()
     {
-        bossAtaques = GetComponent<BossAtaques>();
-        bossPatrulha = GetComponent<BossPatrulha>();
-
-        cooldownTimer = attackCooldown;
-
-        Debug.Log("Patrulha: " + (bossPatrulha != null));
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
-        switch (currentState)
-        {
-            case BossState.Idle:
-                IdleState();
-                break;
-
-            case BossState.ChooseAttack:
-                ChooseAttackState();
-                break;
-
-            case BossState.Recover:
-                RecoverState();
-                break;
-        }
+        FacePlayer();
+        TryShootFireball();
     }
 
-    void IdleState()
+    void FixedUpdate()
     {
-        cooldownTimer -= Time.deltaTime;
-
-        bossPatrulha.Patrulhar(true);
-
-        if (cooldownTimer <= 0)
-        {
-            currentState = BossState.ChooseAttack;
-        }
+        MoveToPlayer();
     }
 
-    void ChooseAttackState()
+    void MoveToPlayer()
     {
+        if (player == null) return;
+
+        float distance = Mathf.Abs(player.position.x - transform.position.x);
+
+        if (distance <= attackRange)
+        {
+            Debug.Log("Distância atual: " + distance);
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
+        float direction = player.position.x > transform.position.x ? 1f : -1f;
+
+        rb.velocity = new Vector2(direction * speed, rb.velocity.y);
+    }
+
+    void FacePlayer()
+    {
+        if (sr == null || player == null) return;
+
+        sr.flipX = player.position.x > transform.position.x;
+    }
+
+    void TryShootFireball()
+    {
+        if (!canShoot) return;
+        if (player == null || fireballPrefab == null || firePoint == null) return;
+
         float distance = Vector2.Distance(transform.position, player.position);
 
-        if (distance < 3f)
-            chosenAttack = 0; // Aoe
-        else if (distance < 6f)
-            chosenAttack = 1; // Ataque Diagonal
+        Debug.Log("Distância: " + distance);
+
+        if (distance <= attackRange)
+        {
+            StartCoroutine(ShootFireball());
+        }
+    }
+
+    IEnumerator ShootFireball()
+    {
+        Debug.Log("ATIROU");
+
+        canShoot = false;
+
+        Vector3 spawnPos = firePoint.position + firePoint.right * 0.3f;
+
+        GameObject fb = Instantiate(fireballPrefab, spawnPos, Quaternion.identity);
+
+        BossFireball bf = fb.GetComponent<BossFireball>();
+
+        if (bf == null)
+        {
+            Debug.LogError("BossFireball não encontrado no prefab!");
+        }
         else
-            chosenAttack = 2; // Lançar Espada
-
-        switch (chosenAttack)
         {
-            case 0:
-                bossAtaques.Attack_AoE();
-                break;
-            case 1:
-                Debug.Log("FSM: Ataque 2 → Ataque Diagonal!");
-                break;
-            case 2:
-                Debug.Log("FSM: Ataque 3 → Lançar Espada!");
-                break;
+            Vector2 fireDirection = player.position.x > firePoint.position.x
+                ? Vector2.right
+                : Vector2.left;
+
+            bf.SetDirection(fireDirection);
         }
 
-        currentState = BossState.Attacking;
+        yield return new WaitForSeconds(fireCooldown);
+
+        canShoot = true;
     }
 
-    void AttackState()
+    private bool canDamage = true;
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (bossAtaques.GetState() == BossState.Idle)
+        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+
+        if (player != null && canDamage)
         {
-            currentState = BossState.Recover;
+            player.TakeDamage(1);
+            StartCoroutine(DamageCooldown());
         }
     }
 
-    void RecoverState()
+    IEnumerator DamageCooldown()
     {
-        cooldownTimer = attackCooldown;
-        currentState = BossState.Idle;
+        canDamage = false;
+        yield return new WaitForSeconds(1f);
+        canDamage = true;
     }
 }

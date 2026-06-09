@@ -14,8 +14,12 @@ public class BossVida : MonoBehaviour
     {
         currentHealth -= damage;
 
+        Debug.Log("Boss tomou " + damage + " de dano!");
+        Debug.Log("Vida restante: " + currentHealth);
+
         if (currentHealth <= 0)
         {
+            Debug.Log("Boss morreu!");
             Destroy(gameObject);
         }
     }
