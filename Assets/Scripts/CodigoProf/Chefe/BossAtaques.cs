@@ -140,11 +140,21 @@ public class BossAtaques : MonoBehaviour
 
     public void Attack_Fireball()
     {
-        Vector2 dir = (player.position - firePoint.position).normalized;
+        if (fireballPrefab == null || firePoint == null || player == null)
+        {
+            Debug.LogWarning("Fireball não configurada!");
+            return;
+        }
 
-        GameObject fb =
-            Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
+        // cria a fireball
+        GameObject fb = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
 
-        fb.transform.right = dir;
+        // direção até o player
+        Vector2 direction = (player.position - firePoint.position).normalized;
+
+        // aplica direção
+        fb.transform.right = direction;
+
+        Debug.Log("Boss atirou fireball!");
     }
 }
