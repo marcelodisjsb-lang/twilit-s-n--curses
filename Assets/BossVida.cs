@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossVida : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class BossVida : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Boss morreu!");
-            Destroy(gameObject);
+            SceneManager.LoadScene("Creditos");
         }
     }
 }
