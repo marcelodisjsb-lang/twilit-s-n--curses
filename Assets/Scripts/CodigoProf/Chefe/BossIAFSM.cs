@@ -16,19 +16,31 @@ public class BossIAFSM : MonoBehaviour
     public Transform firePoint;
     public float fireCooldown = 4f;
 
+    [Header("Chuva")]
+    public float chuvaCooldown = 5f;
+
+    [Header("Boss")]
+    public float cooldownBoss = 2f;
+    private bool podeAtacar = false;
+
     private bool canShoot = true;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private BossFightRain bossFightRain;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
+        bossFightRain = GetComponent<BossFightRain>();
+        StartCoroutine(DestravarBoss());
     }
 
     void Update()
-    {
+    {        
+        if (!podeAtacar) { return; }
+
         FacePlayer();
         TryShootFireball();
     }
@@ -36,6 +48,12 @@ public class BossIAFSM : MonoBehaviour
     void FixedUpdate()
     {
         MoveToPlayer();
+    }
+
+    IEnumerator DestravarBoss()
+    {
+        yield return new WaitForSeconds(cooldownBoss);
+        podeAtacar=true;
     }
 
     void MoveToPlayer()
@@ -76,11 +94,14 @@ public class BossIAFSM : MonoBehaviour
         {
             StartCoroutine(ShootFireball());
         }
+        else
+        {
+            StartCoroutine(TryCastRain());
+        }
     }
 
     IEnumerator ShootFireball()
     {
-        Debug.Log("ATIROU");
 
         canShoot = false;
 
@@ -104,6 +125,16 @@ public class BossIAFSM : MonoBehaviour
         }
 
         yield return new WaitForSeconds(fireCooldown);
+
+        canShoot = true;
+    }
+
+    IEnumerator TryCastRain()
+    {
+        canShoot = false;
+        bossFightRain.ChuvaDeFogo();
+
+        yield return new WaitForSeconds(chuvaCooldown);
 
         canShoot = true;
     }

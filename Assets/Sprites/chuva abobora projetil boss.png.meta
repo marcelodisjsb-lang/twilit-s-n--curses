@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -91,7 +91,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: chuva abobora projetil boss_4
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 66
+        width: 65
+        height: 212
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcc393e569ea415408c77b888c5f0ff0
+      internalID: -1280519799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuva abobora projetil boss_14
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 92
+        width: 52
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49d2d26264e45d345b37301679877ca3
+      internalID: -414029900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuva abobora projetil boss_15
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 43
+        width: 130
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b353009a812799a4daecd282334961bd
+      internalID: 1951327533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chuva abobora projetil boss_26
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 44
+        width: 126
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c02e6f8945584424c881fb306da34d7e
+      internalID: -239325310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -102,7 +186,36 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chuva abobora projetil boss_0: 80395965
+      chuva abobora projetil boss_1: -1689380708
+      chuva abobora projetil boss_10: 1139287840
+      chuva abobora projetil boss_11: -1396692499
+      chuva abobora projetil boss_12: -1618371826
+      chuva abobora projetil boss_13: 605971922
+      chuva abobora projetil boss_14: -414029900
+      chuva abobora projetil boss_15: 1951327533
+      chuva abobora projetil boss_16: 988939180
+      chuva abobora projetil boss_17: 1019770710
+      chuva abobora projetil boss_18: -1107157378
+      chuva abobora projetil boss_19: 1004632197
+      chuva abobora projetil boss_2: 1660600542
+      chuva abobora projetil boss_20: -775828992
+      chuva abobora projetil boss_21: -2055474533
+      chuva abobora projetil boss_22: -2092686583
+      chuva abobora projetil boss_23: -1680758720
+      chuva abobora projetil boss_24: -704403305
+      chuva abobora projetil boss_25: -300315809
+      chuva abobora projetil boss_26: -239325310
+      chuva abobora projetil boss_27: -593303231
+      chuva abobora projetil boss_28: -1601292257
+      chuva abobora projetil boss_3: 1297868654
+      chuva abobora projetil boss_4: -1280519799
+      chuva abobora projetil boss_5: 185323455
+      chuva abobora projetil boss_6: -534779410
+      chuva abobora projetil boss_7: 1223999383
+      chuva abobora projetil boss_8: -1483262273
+      chuva abobora projetil boss_9: -216016119
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
